@@ -34,7 +34,7 @@ CREATE TABLE `reservas` (
   `vaga_id` INT NOT NULL,
   `veiculo_id` INT DEFAULT NULL,
   `data_reserva` DATETIME DEFAULT current_timestamp(),
-  `data_expiracao` DATETIME;
+  `data_expiracao` DATETIME,
   FOREIGN KEY (`vaga_id`) REFERENCES `vagas` (`id`),
   FOREIGN KEY (`veiculo_id`) REFERENCES `veiculos` (`id`) ON DELETE SET NULL
 );
