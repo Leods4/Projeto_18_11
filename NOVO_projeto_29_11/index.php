@@ -125,6 +125,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancelar_vaga_id'])) 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Estacionamento</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Mapa de estacionamento */
+        .mapa-estacionamento {
+            padding: 20px;
+            background-color: #4a90e2; /* Cor de fundo azul */
+            color: white; /* Texto branco */
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .estacionamento {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Mapa com 5 colunas */
+            gap: 10px;
+        }
+
+        .vaga {
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .vaga-disponivel {
+            background-color: #4682B4; /* Cor verde claro para vaga disponível */
+            color: white;
+        }
+
+        .vaga-ocupada {
+            background-color: #e74c3c; /* Cor vermelha para vaga ocupada */
+            color: white;
+        }
+
+        .vaga:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .veiculo-form {
+            margin-top: 10px;
+        }
+
+        .btn-reservar {
+            background-color: #f39c12; /* Cor amarela para o botão */
+            color: white;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .alert-error {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .alert-success {
+            background-color: #27ae60;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -152,6 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancelar_vaga_id'])) 
 
     <main>
         <section class="hero">
+            <br><br>
             <h1>Bem-vindo ao Sistema de Estacionamento</h1>
             <p>Gerencie suas vagas e veículos de forma fácil e rápida.</p>
         </section>
@@ -218,27 +288,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancelar_vaga_id'])) 
             form.style.display = form.style.display === 'none' ? 'block' : 'none';
         }
     </script>
-
-<?php if (!$liked): ?>
-    <!-- Like Button (visible only if the user hasn't clicked it yet) -->
-    <form method="POST">
-        <button type="submit" name="like_button">Curtir</button>
-    </form>
-<?php else: ?>
-    <!-- Message after the user clicks the button -->
-    <p>Obrigado pelo feedback!</p>
-<?php endif; ?>
-
-<?php
-// Handle the button click and set the cookie
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_button'])) {
-    // Set the cookie for 30 days
-    setcookie('liked', 'true', time() + (30 * 24 * 60 * 60), '/');  // Expires in 30 days
-    // Refresh the page so the cookie is available
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
-?>
 
 </body>
 </html>
