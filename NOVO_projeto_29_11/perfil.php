@@ -30,6 +30,14 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil - Sistema de Estacionamento</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        
+        .foto-perfil {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;  
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -53,31 +61,31 @@ $conn->close();
 
     <main>
         <section class="perfil">
-            <h2>Perfil do Usuário</h2>
+            <br>
+            <br>
+            <h2>Perfil do Usuário</h2><br>
             <div>
                 <p><strong>Nome:</strong> <?php echo htmlspecialchars($nome); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 <p><strong>Telefone:</strong> <?php echo htmlspecialchars($telefone) ? htmlspecialchars($telefone) : 'Não informado'; ?></p>
-                <p><strong>Foto de Perfil:</strong> 
+                <p><strong>Foto de Perfil:</strong> <br>
                     <?php 
                     if ($foto_perfil) {
-                        echo '<img src="' . htmlspecialchars($foto_perfil) . '" alt="Foto de Perfil">';
+                        echo '<img src="' . htmlspecialchars($foto_perfil) . '" alt="Foto de Perfil" class="foto-perfil">';
                     } else {
                         echo 'Não informada';
                     }
                     ?>
                 </p>
             </div>
-
-            <!-- Formulário para atualizar o nome -->
-            <h3>Atualizar Nome</h3>
+                    
+            <h4>Atualizar Nome</h4>
             <form action="atualizar_perfil.php" method="POST">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" value="<?php echo htmlspecialchars($nome); ?>" required>
                 <button type="submit">Salvar Nome</button>
             </form>
 
-            <!-- Formulário para atualizar a foto de perfil -->
             <h3>Atualizar Foto de Perfil</h3>
             <form action="atualizar_perfil.php" method="POST" enctype="multipart/form-data">
                 <label for="foto_perfil">Foto:</label>
@@ -85,7 +93,6 @@ $conn->close();
                 <button type="submit">Salvar Foto</button>
             </form>
 
-            <!-- Formulário para atualizar o telefone -->
             <h3>Atualizar Telefone</h3>
             <form action="atualizar_perfil.php" method="POST">
                 <label for="telefone">Telefone:</label>
@@ -95,6 +102,7 @@ $conn->close();
 
             <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
             <?php if (isset($success)) echo "<p style='color: green;'>$success</p>"; ?>
+            <br><br><br><br>
         </section>
     </main>
 
