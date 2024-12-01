@@ -31,11 +31,101 @@ $conn->close();
     <title>Perfil - Sistema de Estacionamento</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .perfil {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h2, h3, h4 {
+            color: #4a90e2;
+        }
+
         .foto-perfil {
             width: 150px;
             height: 150px;
-            object-fit: cover;  
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #4a90e2;
+        }
+
+        .perfil div {
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4682B4;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3a6ea5;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        footer {
+            background-color: #4a90e2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
     </style>
 </head>
@@ -61,14 +151,12 @@ $conn->close();
 
     <main>
         <section class="perfil">
-            <br>
-            <br>
-            <h2>Perfil do Usuário</h2><br>
+            <h2>Perfil do Usuário</h2>
             <div>
                 <p><strong>Nome:</strong> <?php echo htmlspecialchars($nome); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 <p><strong>Telefone:</strong> <?php echo htmlspecialchars($telefone) ? htmlspecialchars($telefone) : 'Não informado'; ?></p>
-                <p><strong>Foto de Perfil:</strong> <br>
+                <p><strong>Foto de Perfil:</strong><br>
                     <?php 
                     if ($foto_perfil) {
                         echo '<img src="' . htmlspecialchars($foto_perfil) . '" alt="Foto de Perfil" class="foto-perfil">';
@@ -78,7 +166,7 @@ $conn->close();
                     ?>
                 </p>
             </div>
-                    
+
             <h4>Atualizar Nome</h4>
             <form action="atualizar_perfil.php" method="POST">
                 <label for="nome">Nome:</label>
@@ -100,9 +188,8 @@ $conn->close();
                 <button type="submit">Salvar Telefone</button>
             </form>
 
-            <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
-            <?php if (isset($success)) echo "<p style='color: green;'>$success</p>"; ?>
-            <br><br><br><br>
+            <?php if (isset($error)) echo "<div class='alert alert-error'>$error</div>"; ?>
+            <?php if (isset($success)) echo "<div class='alert alert-success'>$success</div>"; ?>
         </section>
     </main>
 
